@@ -13,7 +13,7 @@ export const useTodo = () => {
     });
   }, [])
 
-  const toggleTodoListItemState = (id, done) => {
+  const toggleTodoListItemStatus = (id, done) => {
     const todoItem = todoList.find((todo) => todo.id === id)
     const newTodoItem = { ...todoItem, done: !done};
 
@@ -49,7 +49,7 @@ export const useTodo = () => {
 
   return {
     todoList,
-    toggleTodoListItemState,
+    toggleTodoListItemStatus,
     addTodoListItem,
     deleteTodoListItem
   }

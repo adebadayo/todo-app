@@ -7,21 +7,30 @@ const TodoTitle = ({title, as}) => {
   return <p>{title}</p>
 }
 
-const TodoItem = ({todo}) => {
+const TodoItem =
+  ({todo, toggleTodoListItemStatus, deleteTodoListItem}) => {
+  const handleToggleListItemStatus = () => toggleTodoListItemStatus(todo.id, todo.done)
+  const handleDeleteTodoListItems = () => deleteTodoListItem(todo.id)
+
   return (
     <li>
       {todo.content}
-      <button>{todo.done ? "完了リスト" : "未完了リスト"}</button>
-      <button>削除</button>
+      <button onClick={handleToggleListItemStatus}>{todo.done ? "完了リスト" : "未完了リスト"}</button>
+      <button onClick={handleDeleteTodoListItems}>削除</button>
     </li>
   )
 }
 
-const TodoItemList = ({todolist}) => {
+const TodoList = ({todolist, toggleTodoListItemStatus, deleteTodoListItem}) => {
   return (
     <ul>
       {todolist.map((todo) => (
-          <TodoItem todo={todo} key={todo.id}/>
+          <TodoItem
+            todo={todo}
+            key={todo.id}
+            toggleTodoListItemStatus = {toggleTodoListItemStatus}
+            deleteTodoListItem = {deleteTodoListItem}
+          />
       ))}
     </ul>
   )
@@ -39,7 +48,12 @@ const TodoAdd = ({ inputEl, handleAddTodoListItem }) => {
 
 function App() {
 
-  const { todoList, addTodoListItem }  = useTodo()
+  const {
+    todoList,
+    addTodoListItem,
+    toggleTodoListItemStatus,
+    deleteTodoListItem
+  }  = useTodo()
 
   const inputEl = useRef(null)
 
@@ -74,10 +88,18 @@ function App() {
         handleAddTodoListItem = {handleAddTodoListItem}/>
 
       <TodoTitle title="未完了TODOリスト" as="h2"/>
-      <TodoItemList todolist={inCompletedList}/>
+      <TodoList
+        todolist={inCompletedList}
+        toggleTodoListItemStatus={toggleTodoListItemStatus}
+        deleteTodoListItem={deleteTodoListItem}
+      />
 
       <TodoTitle title="完了TODOリスト" as="h2"/>
-      <TodoItemList todolist={completedList}/>
+      <TodoList
+        todolist={completedList}
+        toggleTodoListItemStatus={toggleTodoListItemStatus}
+        deleteTodoListItem={deleteTodoListItem}
+      />
     </>
   );
 }
