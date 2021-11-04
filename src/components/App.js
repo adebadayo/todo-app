@@ -27,6 +27,16 @@ const TodoItemList = ({todolist}) => {
   )
 }
 
+const TodoAdd = ({ inputEl, handleAddTodoListItem }) => {
+  return (
+    <>
+      <textarea ref={inputEl}/>
+
+      <button onClick={handleAddTodoListItem}>+TODO追加</button>
+    </>
+  )
+}
+
 function App() {
 
   const { todoList, addTodoListItem }  = useTodo()
@@ -59,10 +69,9 @@ function App() {
   return (
     <>
       <TodoTitle title="TODO進捗管理" as="h1"/>
-
-      <textarea ref={inputEl}/>
-
-      <button onClick={handleAddTodoListItem}>+TODO追加</button>
+      <TodoAdd
+        inputEl={inputEl}
+        handleAddTodoListItem = {handleAddTodoListItem}/>
 
       <TodoTitle title="未完了TODOリスト" as="h2"/>
       <TodoItemList todolist={inCompletedList}/>
