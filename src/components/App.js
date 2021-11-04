@@ -1,15 +1,8 @@
-import React, { useState, useEffect} from 'react'
-import axios from "axios";
-
-const todoDatalist = "http://localhost:3888/todos"
+import { useTodo } from '../hooks/useTodo'
 
 const TodoTitle = ({title, as}) => {
-  if(as === 'h1'){
-    return <h1>{title}</h1>
-  }
-  if(as === 'h2'){
-    return <h2>{title}</h2>
-  }
+  if(as === 'h1') return <h1>{title}</h1>
+  if(as === 'h2') return <h2>{title}</h2>
   return <p>{title}</p>
 }
 
@@ -26,7 +19,7 @@ const TodoItem = ({todo}) => {
 const TodoItemList = ({todolist}) => {
   return (
     <ul>
-      { todolist.map((todo) => (
+      {todolist.map((todo) => (
           <TodoItem todo={todo} key={todo.id}/>
       ))}
     </ul>
@@ -35,17 +28,7 @@ const TodoItemList = ({todolist}) => {
 
 function App() {
 
-  const [todoList, setTodolist] = useState([]);
-
-  useEffect(() => {
-    const fetchDate = async () => {
-      const responce = await axios.get(todoDatalist)
-
-      setTodolist(responce.data)
-    };
-    fetchDate()
-  }, [])
-
+  const { todoList }  = useTodo()
 
   console.log("TODOリスト", todoList)
 

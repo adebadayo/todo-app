@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react'
 import {ulid} from "ulid";
 
 import * as TodoData from '../api/todo'
+import {deleteTodoData} from "../api/todo";
 
 export const useTodo = () => {
 
@@ -38,7 +39,7 @@ export const useTodo = () => {
   }
 
   const deleteTodoListItem = (id) => {
-    TodoData.deleteTodoListItem(id).then((deletedItemId) => {
+    TodoData.deleteTodoData(id).then((deletedItemId) => {
       const newTodoist = todoList.filter(
         (item) => item.id !== deletedItemId
       )
