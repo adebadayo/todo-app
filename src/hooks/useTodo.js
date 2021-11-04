@@ -2,7 +2,6 @@ import { useState, useEffect } from 'react'
 import {ulid} from "ulid";
 
 import * as TodoData from '../api/todo'
-import {deleteTodoData} from "../api/todo";
 
 export const useTodo = () => {
 
