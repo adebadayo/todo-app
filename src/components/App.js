@@ -1,5 +1,8 @@
-import { useTodo } from '../hooks/useTodo'
 import {useRef} from "react";
+import { Container } from "@chakra-ui/react"
+import { AddIcon } from "@chakra-ui/icons"
+
+import { useTodo } from '../hooks/useTodo'
 
 import { TodoAdd } from '../components/TodoAdd'
 import { TodoTitle } from '../components/TodoTitle'
@@ -40,7 +43,7 @@ function App() {
   console.log("完了リスト", completedList)
 
   return (
-    <>
+    <Container centerContent p={{base: "4", md: "6"}} maxWidth="3x1">
       <TodoTitle title="TODO進捗管理" as="h1"/>
       <TodoAdd
         inputEl={inputEl}
@@ -61,7 +64,7 @@ function App() {
         title = "完了TODOリスト"
         as = "h2"
       />
-    </>
+    </Container>
   );
 }
 
