@@ -1,3 +1,5 @@
+import { List } from '@chakra-ui/react'
+
 import { TodoItem } from './TodoItem'
 import {TodoTitle} from "./TodoTitle";
 
@@ -11,7 +13,7 @@ export const TodoList = ({
   return (
     <>
       <TodoTitle title={title} as={as}/>
-      <ul>
+      <List w="full">
         {todolist.map((todo) => (
           <TodoItem
             todo={todo}
@@ -20,7 +22,7 @@ export const TodoList = ({
             deleteTodoListItem = {deleteTodoListItem}
           />
         ))}
-      </ul>
+      </List>
     </>
   )
 }
